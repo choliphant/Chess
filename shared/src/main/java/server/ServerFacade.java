@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import exception.ResponseException;
 import model.AuthData;
 import model.GameData;
-import model.UserData;
 
 import java.io.*;
 import java.net.*;
