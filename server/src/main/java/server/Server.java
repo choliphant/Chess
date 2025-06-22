@@ -17,7 +17,7 @@ public class Server {
             System.out.println("using mysql auth");
 
         }
-        catch (Exception e){
+        catch (Throwable e){
             authMemory = new AuthDataDAOMemory();
         }
 
@@ -26,7 +26,7 @@ public class Server {
             userMemory = new UserDAOMysql();
             System.out.println("using mysql user");
         }
-        catch (Exception e){
+        catch (Throwable e){
             userMemory = new UserDAOMemory();
         }
         GameDataAccess gameMemory;
@@ -35,7 +35,7 @@ public class Server {
             System.out.println("using mysql game");
 
         }
-        catch (Exception e){
+        catch (Throwable e){
             gameMemory = new GameDAOMemory();
             System.out.println(e.getMessage());
         }
