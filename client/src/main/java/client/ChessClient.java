@@ -1,5 +1,6 @@
 package client;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -177,6 +178,7 @@ public class ChessClient {
         try {
             serverFacade.createGame(gameName, auth.authToken());
             System.out.println("Game created successfully.");
+            updateGamesList();
         } catch (Exception e) {
             if (e instanceof ResponseException){
                 handleExceptions((ResponseException) e);
@@ -223,7 +225,7 @@ public class ChessClient {
         System.out.print("Enter game number: ");
         int gameNumber;
         try {
-            gameNumber = Integer.parseInt(scanner.nextLine().trim()) + 100;
+            gameNumber = Integer.parseInt(scanner.nextLine().trim());
         }
         catch (Exception e){
             System.out.println("invalid input");
@@ -255,7 +257,7 @@ public class ChessClient {
 
     private static void handleObserveGame(Scanner scanner) {
         System.out.print("Enter game number: ");
-        int gameNumber = Integer.parseInt(scanner.nextLine().trim()) + 100;
+        int gameNumber = Integer.parseInt(scanner.nextLine().trim());
 
         try {
             drawChessBoard(GAMES_LIST.get(gameNumber).game().getBoard(), false); // Observing as white perspective by default
@@ -274,7 +276,7 @@ public class ChessClient {
         else{
             board.resetBlackBoard();
         }
-        String columnLabel = getString(isWhite);
+        String columnLabel = getColumnLabel(isWhite);
 
         System.out.println(columnLabel);
         for (int row = 0; row < 8; row++) {
@@ -299,7 +301,7 @@ public class ChessClient {
                 else if (piece.getTeamColor() == ChessGame.TeamColor.WHITE) {
                     System.out.print(getWhitePieces(piece));
                 } else if (piece.getTeamColor() == ChessGame.TeamColor.BLACK) {
-                    System.out.print(getWBlackPieces(piece));
+                    System.out.print(getBlackPieces(piece));
                 }
             }
             if (!isWhite) {
@@ -312,7 +314,7 @@ public class ChessClient {
         System.out.println(columnLabel);
     }
 
-    private static String getString(boolean isWhite) {
+    private static String getColumnLabel(boolean isWhite) {
         String columnLabel;
 
         if (isWhite){
@@ -345,7 +347,7 @@ public class ChessClient {
         return pieceSequence;
     }
 
-    private static String getWBlackPieces(ChessPiece piece) {
+    private static String getBlackPieces(ChessPiece piece) {
         String pieceSequence = " ";
         switch (piece.toString().toLowerCase()){
             case "k" -> pieceSequence = EscapeSequences.BLACK_KING;

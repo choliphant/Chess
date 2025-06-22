@@ -22,7 +22,7 @@ public class GameDAOMemory implements GameDataAccess {
 
     @Override
     public int createGame(String gameName){
-        int gameID = gameInfo.size() + 100;
+        int gameID = gameInfo.size() + 1;
         gameInfo.put(gameID, new GameData(gameID, null, null, gameName, new ChessGame()));
         return gameID;
     }
